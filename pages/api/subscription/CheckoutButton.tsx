@@ -38,7 +38,7 @@ export default function CheckoutButton({ amount = 1000, label = "Pay" }: Props) 
       // or a clientSecret (for Elements confirmCardPayment flow).
       if (data.sessionId) {
         // if your backend creates a Checkout Session
-        await stripe.redirectToCheckout({ sessionId: data.sessionId });
+        await (stripe as any).redirectToCheckout({ sessionId: data.sessionId });
       } else if (data.clientSecret) {
         // If backend returned a PaymentIntent clientSecret, you need Stripe Elements to confirm card payment.
         // Here we simply log it so developer can implement Elements-based flow.
