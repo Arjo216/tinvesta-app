@@ -24,11 +24,11 @@ const createAvatarRecord = async (profileId: string, imageKey: string, position:
     return { error: avatarPublicUrlError };
   }
 
-  const bucketNamesCount = countWords(avatarPublicUrlData.publicURL, 'avatars');
+  const bucketNamesCount = countWords(avatarPublicUrlData.publicUrl, 'avatars');
   const parsedPublicUrl =
     bucketNamesCount >= 2
-      ? avatarPublicUrlData.publicURL.replace('/avatars', '')
-      : avatarPublicUrlData.publicURL;
+      ? avatarPublicUrlData.publicUrl.replace('/avatars', '')
+      : avatarPublicUrlData.publicUrl;
 
   return supabaseInstance.from('avatars').insert({
     position,

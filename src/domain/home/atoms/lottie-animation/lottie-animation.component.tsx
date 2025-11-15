@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import animation from "./lottie-animation.animation";
 import S from "./lottie-animation.styles";
 
-export const LottieAnimation = (): JSX.Element => {
+export const LottieAnimation = (): jSX.Element => {
   const animationContainerRef = useRef<HTMLDivElement | null>(null);
   const animRef = useRef<any>(null);
 
