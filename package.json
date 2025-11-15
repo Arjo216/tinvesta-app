@@ -68,7 +68,7 @@
     "lottie-web": "^5.13.0",
     "micro": "^10.0.1",
     "nanoid": "^5.1.6",
-    "next": "^16.0.3",
+    "next": "^15.5.6",
     "next-pwa": "^5.6.0",
     "next-query-params": "^5.1.0",
     "next-seo": "^7.0.1",
@@ -142,7 +142,7 @@
     "react-hook-form": "^7.66.0",
     "standard-version": "^9.5.0",
     "ts-jest": "^29.4.5",
-    "typescript": "5.9.3",
+    "typescript": "^5.9.3",
     "use-query-params": "^2.2.1"
   },
   "standard-version": {
