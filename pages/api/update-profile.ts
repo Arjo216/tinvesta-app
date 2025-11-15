@@ -99,11 +99,11 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
   }
 
   const token = cookie.parse(request.headers.cookie || '')['sb:token'];
-
+  
   supabaseInstance.auth.session = () => ({
     user,
     token_type: '',
-    access_token: token,
+    access_token: token ?? '',
   });
 
   const userData = request.body;

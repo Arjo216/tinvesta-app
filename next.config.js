@@ -1,4 +1,26 @@
 const nextPwa = require('next-pwa');
+// next.config.js (add or edit webpack section)
+const path = require("path");
+
+module.exports = {
+  // ...existing config
+  webpack: (config, { isServer }) => {
+    // ensure watchOptions exists
+    config.watchOptions = config.watchOptions || {};
+    config.watchOptions.ignored = [
+      /node_modules/,
+      /.*\\pagefile\.sys/,
+      /.*\\swapfile\.sys/,
+      /.*\\hiberfil\.sys/,
+      /.*\\DumpStack\.log\.tmp/,
+      /.*\\System Volume Information/,
+    ];
+
+    // keep any existing webpack modifications intact
+    return config;
+  },
+};
+
 
 const ContentSecurityPolicy = `
   script-src * 'unsafe-inline' 'unsafe-eval' blob:;

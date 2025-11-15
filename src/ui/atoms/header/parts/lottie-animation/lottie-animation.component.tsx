@@ -1,4 +1,5 @@
 import lottie from 'lottie-web';
+
 import { useEffect, useRef } from 'react';
 
 import animation from './lottie-animation.animation';
