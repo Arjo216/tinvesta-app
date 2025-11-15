@@ -99,7 +99,7 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
   supabaseInstance.auth.session = () => ({
     user,
     token_type: '',
-    access_token: token,
+    access_token: token ?? '',
   });
 
   const userData = request.body;

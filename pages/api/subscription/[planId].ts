@@ -51,6 +51,17 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
 
   const token = cookie.parse(request.headers.cookie || '')['sb:token'];
 
+  if (!token) {
+    logApiError(
+      `${EApiEndpoint.SUBSCRIPTION}/[planId]`,
+      EApiError.UNAUTHORIZED,
+      'No token found in cookies',
+      request.headers,
+    );
+
+    return response.status(401).send(EApiError.UNAUTHORIZED);
+  }
+
   supabaseInstance.auth.session = () => ({
     user,
     token_type: '',
