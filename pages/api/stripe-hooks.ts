@@ -40,10 +40,10 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
             .from('subscriptions')
             .update({
               is_subscribed: true,
-              // @ts-expect-error
+              
               interval: event.data.object.items.data[0].plan.interval,
             })
-            // @ts-expect-error
+            
             .eq('stripe_customer', event.data.object.customer);
 
           if (updatedSubscriptionError) {
@@ -62,7 +62,7 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
               interval: null,
               is_subscribed: false,
             })
-            // @ts-expect-error
+            
             .eq('stripe_customer', event.data.object.customer);
 
           if (updatedSubscriptionError) {

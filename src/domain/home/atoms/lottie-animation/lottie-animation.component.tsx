@@ -1,40 +1,34 @@
 // src/components/LottieAnimation.tsx
-import { useEffect, useRef } from "react";
-import animation from "./lottie-animation.animation";
+// src/domain/home/atoms/lottie-animation/lottie-animation.component.tsx
+import { JSX, useEffect, useRef } from "react";
 import S from "./lottie-animation.styles";
+import animation from "./lottie-animation.animation";
 
-export const LottieAnimation = (): jSX.Element => {
+export const LottieAnimation = (): JSX.Element | null => {
   const animationContainerRef = useRef<HTMLDivElement | null>(null);
-  const animRef = useRef<any>(null);
 
   useEffect(() => {
-    let cancelled = false;
+    let mounted = true;
+    let item: any = null;
 
+    // dynamic import only on client
     (async () => {
-      // dynamic import: runs only in the browser (not during SSR)
-      const lottieModule = await import("lottie-web");
-      // some bundlers put the default export differently
-      const lottie = (lottieModule as any).default ?? lottieModule;
+      if (!mounted) return;
+      if (!animationContainerRef.current) return;
 
-      if (cancelled) return;
-      if (animationContainerRef.current) {
-        animRef.current = lottie.loadAnimation({
-          animationData: animation,
-          container: animationContainerRef.current,
-          renderer: "svg",
-          loop: true,
-          autoplay: true,
-        });
-      }
+      const lottie = await import("lottie-web");
+      item = lottie.default.loadAnimation({
+        container: animationContainerRef.current!,
+        animationData: animation,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+      });
     })();
 
     return () => {
-      cancelled = true;
-      try {
-        if (animRef.current) animRef.current.destroy();
-      } catch (e) {
-        /* silent */
-      }
+      mounted = false;
+      try { item?.destroy?.(); } catch { /* ignore */ }
     };
   }, []);
 
