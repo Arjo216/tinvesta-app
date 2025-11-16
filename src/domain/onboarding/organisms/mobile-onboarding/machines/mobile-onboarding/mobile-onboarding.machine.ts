@@ -83,7 +83,7 @@ export const onboardingStateMachine = createMachine<IMobileOnboardingMachineCont
       },
       [EMobileOnboardingMachineStates.STEP_FIVE_HUB]: {
         always: [
-          { target: EMobileOnboardingMachineStates.STEP_FIVE_STARTUP, cond: 'isStartupPath' },
+          { target: EMobileOnboardingMachineStates.STEP_FIVE_STARTUP, guard: 'isStartupPath' },
           { target: EMobileOnboardingMachineStates.STEP_FIVE_INVESTOR },
         ],
       },
@@ -180,7 +180,7 @@ export const onboardingStateMachine = createMachine<IMobileOnboardingMachineCont
       [EMobileOnboardingMachineStates.HOUSE_RULES_AGREEMENTS]: {
         on: {
           [EMobileOnboardingMachineEvents.BACK]: [
-            { target: EMobileOnboardingMachineStates.STEP_NINE_STARTUP, cond: 'isStartupPath' },
+            { target: EMobileOnboardingMachineStates.STEP_NINE_STARTUP, guard: 'isStartupPath' },
             { target: EMobileOnboardingMachineStates.STEP_NINE_INVESTOR },
           ],
         },
